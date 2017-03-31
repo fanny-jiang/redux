@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import store from '../store'
 import Lyrics from '../components/Lyrics'
-import {setLyrics} from '../../redux/action-creators/lyrics'
-import axios from 'axios'
+import {setLyrics, fetchLyrics} from '../../redux/action-creators/lyrics'
+import axios from 'axios';
 
 export default class LyricsContainer extends Component {
   constructor(props){
@@ -17,9 +17,9 @@ export default class LyricsContainer extends Component {
   }
 
   componentDidMount() {
-    store.subscribe(function (){
+    store.subscribe( () => {
       this.setState(store.getState())
-    })
+    });
   }
 
   componentWillUnmount() {
@@ -36,18 +36,16 @@ export default class LyricsContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
-    .then(res => {
-      store.dispatch(setLyrics(res.data.lyric))
-    })
-    .catch(console.error)
+    if (this.state.artistQuery && this.state.songQuery) {
+      store.dispatch(fetchLyrics(this.state.artistQuery, this.state.songQuery));
+    }
   }
 
   render(){
-    return(
+    return (
       <div>
         <Lyrics
-          text={this.state.text}
+          text={this.state.lyrics.text}
           setArtist={this.setArtist}
           setSong={this.setSong}
           artistQuery={this.state.artistQuery}
