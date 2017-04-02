@@ -19,6 +19,7 @@ export default function Lyrics (props){
             <h3>Song Name</h3>
               <input type='text' value={props.songQuery} onChange={songChange}></input>
             </div>
+            <br />
             <pre>{props.text || 'Search above!'}</pre>
           <button type='submit'>Submit</button>
       </form>

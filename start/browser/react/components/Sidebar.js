@@ -40,10 +40,9 @@ const Sidebar = (props) => {
         }
       </ul>
       <section>
-      <Link to="/lyrics">
-        <h4 className="text-muted">LYRICS
+        <h4 className="text-muted">
+            <Link to='/lyrics'>LYRICS</Link>
         </h4>
-      </Link>
       </section>
     </sidebar>
   );

@@ -17,13 +17,13 @@ export default class LyricsContainer extends Component {
   }
 
   componentDidMount() {
-    store.subscribe( () => {
+    this.unsubscribe = store.subscribe( () => {
       this.setState(store.getState())
     });
   }
 
   componentWillUnmount() {
-      store.unsubscribe()
+      this.unsubscribe()
   }
 
   setArtist(artist){
